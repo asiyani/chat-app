@@ -13,9 +13,9 @@ socket.on('newMessage', (data) => {
     console.log('New Message ',data);
 });
 
-setTimeout(function() {
-    socket.emit('createMessage', {
-       from:'client@example.com',
-       text:'hey whats up'
-})
-}, 4000);
+// setTimeout(function() {
+//     socket.emit('createMessage', {
+//        from:'client@example.com',
+//        text:'hey whats up'
+// })
+// }, 4000);
