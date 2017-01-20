@@ -9,13 +9,24 @@ socket.on('disconnect', () => {
     console.log('Disconnected from server');
 });
 
-socket.on('newMessage', (data) => {
-    console.log('New Message ',data);
+socket.on('newMessage', (message) => {
+    console.log('New Message ', message);
+    var li = jQuery('<li></li>');
+    li.text( `${message.from} : ${message.text}` );
+    jQuery('#messages').append(li);
 });
 
-// setTimeout(function() {
-//     socket.emit('createMessage', {
-//        from:'client@example.com',
-//        text:'hey whats up'
-// })
-// }, 4000);
+
+jQuery('#message-form').on('submit', function (e) {
+    e.preventDefault();
+
+    var name = jQuery("[name='userName']").val();
+    var message = jQuery("[name='message']").val();
+    console.log(name);
+    socket.emit('createMessage', {
+        from: name,
+        text: message
+    }, function (data) {
+        console.log('Got it!', data);
+    });
+});
